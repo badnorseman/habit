@@ -20,14 +20,14 @@ export const getUserhabits = () => dispatch => {
   }).catch(err => err)
 }
 
-export const checkUserhabit = userhabit => {
+export const checkOffHabit = userhabit => {
   const d = new Date()
   const uh = Object.assign({}, userhabit)
   uh.checked = d.toJSON()
   return dispatch => {
     return updateDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
       if (doc.ok) {
-        dispatch({ type: actionTypes.CHECK_USERHABIT, userhabit: uh })
+        dispatch({ type: actionTypes.UPDATE_USERHABIT, userhabit: uh })
       } else {
         dispatch(errorMsg(doc.status))
       }
@@ -35,7 +35,7 @@ export const checkUserhabit = userhabit => {
   }
 }
 
-export const createUserhabit = userhabit => {
+export const startHabit = userhabit => {
   const d = new Date()
   const uh = Object.assign({}, userhabit)
   uh.started = d.toJSON()
@@ -51,7 +51,7 @@ export const createUserhabit = userhabit => {
   }
 }
 
-export const deleteUserhabit = userhabit => {
+export const endHabit = userhabit => {
   return dispatch => {
     return deleteDoc(dbUrl, headers, userhabit).then(res => res.json()).then(doc => {
       if (doc.ok) {
