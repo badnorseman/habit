@@ -28,6 +28,7 @@ export default StyleSheet.create({
   buttonContainer: {
     backgroundColor: 'rgb(0,150,136)',
     height: 72,
+    marginBottom: 1,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
