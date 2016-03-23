@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as habitActions from '../actions/habitActions'
-import { createUserhabit } from '../actions/userhabitActions'
+import { startHabit } from '../actions/userhabitActions'
 import HabitList from '../components/HabitList'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = dispatch => {
   return {
     actions: bindActionCreators(
-      Object.assign({}, habitActions, { createUserhabit }), dispatch)
+      Object.assign({}, habitActions, { startHabit }), dispatch)
   }
 }
 
