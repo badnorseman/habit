@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/actionTypes'
 export default function userhabits(state = {}, action = {}) {
   switch (action.type) {
     case actionTypes.GET_USERHABITS:
-      return Object.assign({}, state,
+      return Object.assign({},
         action.userhabits.reduce((result, uh) => {
           result[uh._id] = uh
           return result
