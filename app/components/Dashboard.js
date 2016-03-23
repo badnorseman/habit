@@ -19,10 +19,10 @@ export default class Dashboard extends Component {
   render() {
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     const dataSource = ds.cloneWithRows(this.props.data || [])
+    const header = Object.keys(this.props.data).length === 0 ? 'Hey, I see nothing here. Let\'s select one of the habits and get started.' : 'Hey, let\'s do a habit and check it off.'
     return (
       <View style={styles.container}>
-        {(Object.keys(this.props.data).length === 0) &&
-        <ListHeader header="Hey, I see nothing here. Let's select one of the habits and get started." />}
+        <ListHeader header={header} />
         <ListView
           automaticallyAdjustContentInsets={false}
           dataSource={dataSource}

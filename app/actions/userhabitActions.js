@@ -1,8 +1,9 @@
 import * as actionTypes from '../constants/actionTypes'
 import { makeAction } from '../utils/makeAction'
-import { createDoc } from '../utils/createDoc'
 import { readAllDoc } from '../utils/readAllDoc'
+import { createDoc } from '../utils/createDoc'
 import { deleteDoc } from '../utils/deleteDoc'
+import { updateDoc } from '../utils/updateDoc'
 import dbUrl from '../constants/dbUrl'
 import headers from '../constants/headers'
 
@@ -19,15 +20,14 @@ export const getUserhabits = () => dispatch => {
   }).catch(err => err)
 }
 
-export const createUserhabit = habit => {
+export const checkOffHabit = userhabit => {
   const d = new Date()
-  const userhabit = Object.assign({}, habit)
-  userhabit.started = d.toJSON()
+  const uh = Object.assign({}, userhabit)
+  uh.checked = d.toJSON()
   return dispatch => {
-    return createDoc(dbUrl, headers, userhabit).then(res => res.json()).then(doc => {
+    return updateDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
       if (doc.ok) {
-        [ userhabit._id, userhabit._rev ] = [ doc.id, doc.rev ]
-        dispatch({ type: actionTypes.CREATE_USERHABIT, userhabit })
+        dispatch({ type: actionTypes.UPDATE_USERHABIT, userhabit: uh })
       } else {
         dispatch(errorMsg(doc.status))
       }
@@ -35,10 +35,25 @@ export const createUserhabit = habit => {
   }
 }
 
-export const deleteUserhabit = userhabit => {
-  const { _id, _rev } = userhabit
+export const startHabit = userhabit => {
+  const d = new Date()
+  const uh = Object.assign({}, userhabit)
+  uh.started = d.toJSON()
   return dispatch => {
-    return deleteDoc(dbUrl, headers, _id, _rev).then(res => res.json()).then(doc => {
+    return createDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
+      if (doc.ok) {
+        [ uh._id, uh._rev ] = [ doc.id, doc.rev ]
+        dispatch({ type: actionTypes.CREATE_USERHABIT, userhabit: uh })
+      } else {
+        dispatch(errorMsg(doc.status))
+      }
+    }).catch(err => err)
+  }
+}
+
+export const endHabit = userhabit => {
+  return dispatch => {
+    return deleteDoc(dbUrl, headers, userhabit).then(res => res.json()).then(doc => {
       if (doc.ok) {
         dispatch({ type: actionTypes.DELETE_USERHABIT, userhabit })
       } else {
