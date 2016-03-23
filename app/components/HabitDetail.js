@@ -11,16 +11,19 @@ export default class HabitDetail extends Component {
   render() {
     const { navigator, data, actions } = this.props
     const started = new Date(data.started).toDateString()
-    const checked = new Date(data.started).toDateString()
+    const checked = new Date(data.checked).toDateString()
     return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         {(data.started) &&
-        <View>
-          <Text style={styles.contentHeader}>My Activity</Text>
-          <Text style={styles.contentText}>Started&#x20;{started}</Text>
+          <View>
+            <Text style={styles.contentHeader}>My Activity</Text>
+            <Text style={styles.contentText}>Started&#x20;{started}</Text>
+          </View>
+        }
+        {(data.checked) &&
           <Text style={styles.contentText}>Checked&#x20;{checked}</Text>
-        </View>}
+        }
         <Text style={styles.contentHeader}>{data.summary}</Text>
         <Text style={styles.contentText}>{data.description}</Text>
       </View>
@@ -32,7 +35,7 @@ export default class HabitDetail extends Component {
               navigator.pop()
             }}>
               <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>CHECK</Text>
+                <Text style={styles.buttonText}>CHECK OFF</Text>
               </View>
             </Button>
             <Button onPress={() => {
@@ -44,16 +47,14 @@ export default class HabitDetail extends Component {
               </View>
             </Button>
           </View> :
-          <View>
-            <Button onPress={() => {
-              actions.createUserhabit(data)
-              navigator.pop()
-            }}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>START</Text>
-              </View>
-            </Button>
-          </View>
+          <Button onPress={() => {
+            actions.createUserhabit(data)
+            navigator.pop()
+          }}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>START</Text>
+            </View>
+          </Button>
         }
       </View>
     </View>

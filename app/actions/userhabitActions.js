@@ -20,14 +20,14 @@ export const getUserhabits = () => dispatch => {
   }).catch(err => err)
 }
 
-export const checkUserhabit = uh => {
+export const checkUserhabit = userhabit => {
   const d = new Date()
-  const userhabit = Object.assign({}, uh)
-  userhabit.checked = d.toJSON()
+  const uh = Object.assign({}, userhabit)
+  uh.checked = d.toJSON()
   return dispatch => {
-    return updateDoc(dbUrl, headers, userhabit).then(res => res.json()).then(doc => {
+    return updateDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
       if (doc.ok) {
-        dispatch({ type: actionTypes.CHECK_USERHABIT, userhabit })
+        dispatch({ type: actionTypes.CHECK_USERHABIT, userhabit: uh })
       } else {
         dispatch(errorMsg(doc.status))
       }
@@ -35,15 +35,15 @@ export const checkUserhabit = uh => {
   }
 }
 
-export const createUserhabit = uh => {
+export const createUserhabit = userhabit => {
   const d = new Date()
-  const userhabit = Object.assign({}, uh)
-  userhabit.started = d.toJSON()
+  const uh = Object.assign({}, userhabit)
+  uh.started = d.toJSON()
   return dispatch => {
-    return createDoc(dbUrl, headers, userhabit).then(res => res.json()).then(doc => {
+    return createDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
       if (doc.ok) {
-        [ userhabit._id, userhabit._rev ] = [ doc.id, doc.rev ]
-        dispatch({ type: actionTypes.CREATE_USERHABIT, userhabit })
+        [ uh._id, uh._rev ] = [ doc.id, doc.rev ]
+        dispatch({ type: actionTypes.CREATE_USERHABIT, userhabit: uh })
       } else {
         dispatch(errorMsg(doc.status))
       }
