@@ -1,5 +1,4 @@
 import React, { Component, Navigator, View } from 'react-native'
-import ActivityDetail from '../components/ActivityDetail'
 import Dashboard from '../containers/DashboardContainer'
 import HabitDetail from '../components/HabitDetail'
 import HabitList from '../containers/HabitListContainer'
@@ -28,8 +27,6 @@ export default class Main extends Component {
     switch (route.id) {
       case 'dashboard':
         return (<Dashboard navigator={navigator} />)
-      case 'activitydetail':
-        return (<ActivityDetail navigator={navigator} data={route.data} actions={route.actions} />)
       case 'habitlist':
         return (<HabitList navigator={navigator} />)
       case 'habitdetail':

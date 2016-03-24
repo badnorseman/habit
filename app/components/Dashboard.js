@@ -43,7 +43,7 @@ export default class Dashboard extends Component {
   }
   pressRow(rowData: {}) {
     this.props.navigator.push({
-      id: 'activitydetail', title: rowData.title, data: rowData, actions: this.props.actions
+      id: 'habitdetail', title: rowData.title, data: rowData, actions: this.props.actions
     })
   }
 }
