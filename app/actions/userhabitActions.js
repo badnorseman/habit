@@ -36,7 +36,7 @@ export const startHabit = userhabit => {
   }
 }
 
-export const checkOffHabit = userhabit => {
+export const checkHabit = userhabit => {
   const d = new Date()
   const uh = Object.assign({}, userhabit)
   uh.checked = d.toJSON()

@@ -11,7 +11,7 @@ export default class HabitDetail extends Component {
   render() {
     const { navigator, data, actions } = this.props
     const started = new Date(data.started).toDateString()
-    const checked = new Date(data.checked).toDateString() + ' ' + new Date(data.checked).toTimeString()
+    const checked = new Date(data.checked).toDateString()
     return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -22,7 +22,7 @@ export default class HabitDetail extends Component {
           </View>
         }
         {(data.checked) &&
-          <Text style={styles.contentText}>Last checked off&#x20;{checked}</Text>
+          <Text style={styles.contentText}>Last checked&#x20;{checked}</Text>
         }
         <Text style={styles.contentHeader}>{data.summary}</Text>
         <Text style={styles.contentText}>{data.description}</Text>
@@ -31,11 +31,11 @@ export default class HabitDetail extends Component {
         {(data._id) ?
           <View>
             <Button onPress={() => {
-              actions.checkOffHabit(data)
+              actions.checkHabit(data)
               navigator.pop()
             }}>
               <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>CHECK OFF</Text>
+                <Text style={styles.buttonText}>CHECK</Text>
               </View>
             </Button>
             <Button onPress={() => {
