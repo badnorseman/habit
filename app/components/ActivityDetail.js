@@ -30,14 +30,6 @@ export default class ActivityDetail extends Component {
             <Text style={styles.buttonText}>CHECK</Text>
           </View>
         </Button>
-        <Button onPress={() => {
-          actions.endHabit(data)
-          navigator.pop()
-        }}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>END</Text>
-          </View>
-        </Button>
       </View>
     </View>
   )}

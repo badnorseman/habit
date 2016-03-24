@@ -17,6 +17,14 @@ export default class HabitDetail extends Component {
         <Text style={styles.contentText}>{data.description}</Text>
       </View>
       <View>
+        {(data._id) ? <Button onPress={() => {
+          actions.endHabit(data)
+          navigator.pop()
+        }}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>END</Text>
+          </View>
+        </Button> :
         <Button onPress={() => {
           actions.startHabit(data)
           navigator.pop()
@@ -24,7 +32,7 @@ export default class HabitDetail extends Component {
           <View style={styles.buttonContainer}>
             <Text style={styles.buttonText}>START</Text>
           </View>
-        </Button>
+        </Button>}
       </View>
     </View>
   )}
