@@ -8,45 +8,22 @@ export default class HabitDetail extends Component {
     data: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props)
+    this.renderActivity = this.renderActivity.bind(this)
+    this.renderActivityButtonBar = this.renderActivityButtonBar.bind(this)
+  }
   render() {
     const { navigator, data, actions } = this.props
-    const started = new Date(data.started).toDateString()
-    const checked = new Date(data.checked).toDateString()
     return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        {(data.started) &&
-          <View>
-            <Text style={styles.contentHeader}>My Activity</Text>
-            <Text style={styles.contentText}>Started&#x20;{started}</Text>
-          </View>
-        }
-        {(data.checked) &&
-          <Text style={styles.contentText}>Last checked&#x20;{checked}</Text>
-        }
+        {(data.started) && this.renderActivity(data)}
         <Text style={styles.contentHeader}>{data.summary}</Text>
         <Text style={styles.contentText}>{data.description}</Text>
       </View>
       <View>
-        {(data._id) ?
-          <View>
-            <Button onPress={() => {
-              actions.checkHabit(data)
-              navigator.pop()
-            }}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>CHECK</Text>
-              </View>
-            </Button>
-            <Button onPress={() => {
-              actions.endHabit(data)
-              navigator.pop()
-            }}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>END</Text>
-              </View>
-            </Button>
-          </View> :
+        {(data.started) ? this.renderActivityButtonBar(navigator, data, actions) :
           <Button onPress={() => {
             actions.startHabit(data)
             navigator.pop()
@@ -59,4 +36,39 @@ export default class HabitDetail extends Component {
       </View>
     </View>
   )}
+  renderActivity(data) {
+    const started = new Date(data.started).toDateString()
+    const checked = new Date(data.checked).toDateString()
+    return (
+      <View>
+        <Text style={styles.contentHeader}>My Activity</Text>
+        <Text style={styles.contentText}>Started&#x20;{started}</Text>
+        {(data.checked) &&
+          <Text style={styles.contentText}>Last checked&#x20;{checked}</Text>
+        }
+      </View>
+    )
+  }
+  renderActivityButtonBar(navigator, data, actions) {
+    return (
+      <View>
+        <Button onPress={() => {
+          actions.checkHabit(data)
+          navigator.pop()
+        }}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>CHECK</Text>
+          </View>
+        </Button>
+        <Button onPress={() => {
+          actions.endHabit(data)
+          navigator.pop()
+        }}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>END</Text>
+          </View>
+        </Button>
+      </View>
+    )
+  }
 }
