@@ -1,8 +1,8 @@
-import React, { Component, PropTypes, TouchableHighlight } from 'react-native'
+import React, { Component, PropTypes, TouchableOpacity } from 'react-native'
 
 export default class Button extends Component {
   static propTypes = {
-    ...TouchableHighlight.propTypes,
+    ...TouchableOpacity.propTypes,
     disabled: PropTypes.bool,
     children: PropTypes.element.isRequired
   };
@@ -15,9 +15,9 @@ export default class Button extends Component {
       touchableProps.onLongPress = this.props.onLongPress
     }
     return (
-      <TouchableHighlight {...touchableProps}>
+      <TouchableOpacity {...touchableProps}>
         {this.props.children}
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 }
