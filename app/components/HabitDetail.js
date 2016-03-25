@@ -12,6 +12,7 @@ export default class HabitDetail extends Component {
     const { navigator, data, actions } = this.props
     const started = new Date(data.started).toDateString()
     const checked = new Date(data.checked).toDateString()
+    const checkedToday = Date.parse(checked) === Date.parse(new Date().toDateString()) ? true : false
     return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -30,7 +31,7 @@ export default class HabitDetail extends Component {
       <View>
         {(data.started) ?
           <View>
-            <Button onPress={() => {
+            <Button disabled={checkedToday} onPress={() => {
               actions.checkHabit(data)
               navigator.pop()
             }}>
