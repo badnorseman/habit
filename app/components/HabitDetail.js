@@ -12,7 +12,8 @@ export default class HabitDetail extends Component {
     const { navigator, data, actions } = this.props
     const started = new Date(data.started).toDateString()
     const checked = new Date(data.checked).toDateString()
-    const checkedToday = Date.parse(checked) === Date.parse(new Date().toDateString()) ? true : false
+    const checkable = data.started && !data.checked ? true :
+      Date.parse(checked) < Date.parse(new Date().toDateString()) ? true : false
     return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -29,25 +30,23 @@ export default class HabitDetail extends Component {
         <Text style={styles.contentText}>{data.description}</Text>
       </View>
       <View>
+        {(checkable) && <Button onPress={() => {
+          actions.checkHabit(data)
+          navigator.pop()
+        }}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>CHECK</Text>
+          </View>
+        </Button>}
         {(data.started) ?
-          <View>
-            <Button disabled={checkedToday} onPress={() => {
-              actions.checkHabit(data)
-              navigator.pop()
-            }}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>CHECK</Text>
-              </View>
-            </Button>
-            <Button onPress={() => {
-              actions.endHabit(data)
-              navigator.pop()
-            }}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>END</Text>
-              </View>
-            </Button>
-          </View> :
+          <Button onPress={() => {
+            actions.endHabit(data)
+            navigator.pop()
+          }}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>END</Text>
+            </View>
+          </Button> :
           <Button onPress={() => {
             actions.startHabit(data)
             navigator.pop()
