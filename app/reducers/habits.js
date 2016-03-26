@@ -1,7 +1,10 @@
+import * as actionTypes from '../constants/actionTypes'
+
 export default function habits(state = {}, action = {}) {
-  if (action.habits) {
-    return { ...action.habits }
-  } else {
-    return state
+  switch (action.type) {
+    case actionTypes.GET_HABITS:
+      return { ...action.habits }
+    default:
+      return state
   }
 }
