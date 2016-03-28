@@ -19,7 +19,6 @@ const initializeHabit = () => {
 const initializeCustomer = () => {
   const d = new Date()
   const data = {
-    _id: 'customer',
     type: 'customer',
     created: d.toJSON()
   }
