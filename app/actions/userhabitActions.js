@@ -1,11 +1,11 @@
 import * as actionTypes from '../constants/actionTypes'
+import dbUrl from '../constants/dbUrl'
+import headers from '../constants/headers'
 import { makeAction } from '../utils/makeAction'
 import { readAllDoc } from '../utils/readAllDoc'
 import { createDoc } from '../utils/createDoc'
 import { deleteDoc } from '../utils/deleteDoc'
 import { updateDoc } from '../utils/updateDoc'
-import dbUrl from '../constants/dbUrl'
-import headers from '../constants/headers'
 
 const errorMsg = makeAction(actionTypes.ERROR, 'error')
 
