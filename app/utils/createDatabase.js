@@ -1,4 +1,4 @@
-export const createDatabase = (dbUrl) => {
+export const createDatabase = dbUrl => {
   return fetch(dbUrl, {
     method: 'PUT'
   })

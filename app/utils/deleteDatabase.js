@@ -1,4 +1,4 @@
-export const deleteDb = (dbUrl) => {
+export const deleteDb = dbUrl => {
   return fetch(dbUrl, {
     method: 'DELETE'
   })
