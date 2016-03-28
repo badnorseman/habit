@@ -5,10 +5,9 @@ import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 import * as reducers from '../reducers/reducers'
 import { initializeDatabase } from '../utils/initializeDatabase'
-import dbUrl from '../constants/dbUrl'
 import Main from '../components/Main'
 
-initializeDatabase(dbUrl)
+initializeDatabase()
 
 const logger = createLogger()
 

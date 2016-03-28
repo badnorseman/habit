@@ -19,7 +19,7 @@ export default class HabitList extends Component {
   render() {
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     const dataSource = ds.cloneWithRows(this.props.data.habits || [])
-    const header = this.props.data.summary || 'Sorry, you can not select any habits'
+    const header = this.props.data.summary || 'Sorry, you can not select any habits.'
     return (
       <View style={styles.container}>
         <ListHeader header={header} />
