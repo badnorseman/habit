@@ -1,4 +1,5 @@
 import React, { Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
+import { readHabits } from '../utils/readHabits'
 import ListHeader from '../components/ListHeader'
 import styles from './HabitListStyles'
 
@@ -10,13 +11,18 @@ export default class HabitList extends Component {
   };
   constructor(props) {
     super(props)
+    this.state = {
+      data: {}
+    }
     this.renderRow = this.renderRow.bind(this)
     this.pressRow = this.pressRow.bind(this)
   }
   componentDidMount() {
+    this.setState({ data: readHabits() })
     this.props.actions.getHabits()
   }
   render() {
+    console.log(this.state.data)
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     const dataSource = ds.cloneWithRows(this.props.data.habits || [])
     const header = this.props.data.summary || 'Sorry, you can not select any habits.'
