@@ -4,8 +4,7 @@ import headers from '../constants/headers'
 import { readDoc } from '../utils/readDoc'
 
 export const getHabits = () => dispatch => {
-  readDoc(`${dbUrl}/habit`, headers).then(res => res.json()).then(doc => {
-    console.log(doc)
+  return readDoc(`${dbUrl}/habit`, headers).then(res => res.json()).then(doc => {
     dispatch({ type: actionTypes.GET_HABITS, habits: doc })
   }).catch(err => err)
 }
