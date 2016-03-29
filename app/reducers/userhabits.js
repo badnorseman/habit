@@ -5,7 +5,7 @@ export default function userhabits(state = {}, action = {}) {
     case actionTypes.GET_USERHABITS:
       return Object.assign({},
         action.userhabits.reduce((result, uh) => {
-          result[uh._id] = uh
+          if (action.userhabit._id !== 'habit') { result[uh._id] = uh }
           return result
         }, {}))
     case actionTypes.CREATE_USERHABIT:

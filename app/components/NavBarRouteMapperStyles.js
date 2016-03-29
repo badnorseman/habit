@@ -11,6 +11,8 @@ export default StyleSheet.create({
     fontSize: 14
   },
   navBarLeftButton: {
-    paddingLeft: 16
+    height: 100,
+    paddingLeft: 16,
+    width: 100
   }
 })
