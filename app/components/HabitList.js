@@ -1,7 +1,7 @@
 import React, { Alert, Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
+import { readHabitDoc } from '../utils/readHabitDoc'
 import ListHeader from '../components/ListHeader'
 import styles from './HabitListStyles'
-import { readHabitDoc } from '../utils/readHabitDoc'
 
 export default class HabitList extends Component {
   static propTypes = {
@@ -14,9 +14,9 @@ export default class HabitList extends Component {
     this.pressRow = this.pressRow.bind(this)
   }
   componentDidMount() {
-    this.readHabits().then(data => this.setState({ data }))
+    this.fetchData().then(data => this.setState({ data }))
   }
-  async readHabits() {
+  async fetchData() {
     try {
       return await readHabitDoc()
     } catch(err) {
