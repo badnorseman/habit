@@ -1,4 +1,4 @@
-import React, { Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
+import React, { Alert, Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
 import ListHeader from '../components/ListHeader'
 import styles from './HabitListStyles'
 import dbUrl from '../constants/dbUrl'
@@ -12,9 +12,7 @@ export default class HabitList extends Component {
   };
   constructor(props) {
     super(props)
-    this.state = {
-      data: {}
-    }
+    this.state = { data: {} }
     this.renderRow = this.renderRow.bind(this)
     this.pressRow = this.pressRow.bind(this)
   }
@@ -28,7 +26,7 @@ export default class HabitList extends Component {
       let json = await res.json()
       return json
     } catch(err) {
-      return err
+      Alert.alert(null, err)
     }
   }
   render() {
