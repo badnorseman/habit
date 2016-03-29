@@ -1,7 +1,7 @@
 import habits from '../data/habits.json'
 import { createDoc } from '../utils/createDoc'
 
-export const initializeHabits = (dbUrl, headers) => {
+export const initializeHabit = (dbUrl, headers) => {
   const data = {
     _id: 'habit',
     type: 'habit',
