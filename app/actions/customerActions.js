@@ -9,26 +9,26 @@ import { updateDoc } from '../utils/updateDoc'
 
 const errorMsg = makeAction(actionTypes.ERROR, 'error')
 
-export const getUserhabits = () => dispatch => {
+export const getCustomerHabits = () => dispatch => {
   return readAllDoc(dbUrl, headers).then(res => res.json()).then(docs => {
     if (docs.rows) {
-      const userhabits = docs.rows.map(row => (row.doc))
-      dispatch({ type: actionTypes.GET_USERHABITS, userhabits })
+      const habits = docs.rows.map(row => (row.doc))
+      dispatch({ type: actionTypes.GET_CUSTOMER_HABITS, habits })
     } else {
       dispatch(errorMsg(docs.status))
     }
   }).catch(err => err)
 }
 
-export const startHabit = userhabit => {
+export const startHabit = h => {
   const d = new Date()
-  const uh = Object.assign({}, userhabit)
-  uh.started = d.toJSON()
+  const habit = Object.assign({}, h)
+  habit.started = d.toJSON()
   return dispatch => {
-    return createDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
+    return createDoc(dbUrl, headers, habit).then(res => res.json()).then(doc => {
       if (doc.ok) {
-        [ uh._id, uh._rev ] = [ doc.id, doc.rev ]
-        dispatch({ type: actionTypes.CREATE_USERHABIT, userhabit: uh })
+        [ habit._id, habit._rev ] = [ doc.id, doc.rev ]
+        dispatch({ type: actionTypes.CREATE_CUSTOMER_HABIT, habit })
       } else {
         dispatch(errorMsg(doc.status))
       }
@@ -36,15 +36,15 @@ export const startHabit = userhabit => {
   }
 }
 
-export const checkHabit = userhabit => {
+export const checkHabit = h => {
   const d = new Date()
-  const uh = Object.assign({}, userhabit)
-  uh.checked = d.toJSON()
+  const habit = Object.assign({}, h)
+  habit.checked = d.toJSON()
   return dispatch => {
-    return updateDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
+    return updateDoc(dbUrl, headers, habit).then(res => res.json()).then(doc => {
       if (doc.ok) {
-        uh._rev = doc.rev
-        dispatch({ type: actionTypes.UPDATE_USERHABIT, userhabit: uh })
+        habit._rev = doc.rev
+        dispatch({ type: actionTypes.UPDATE_CUSTOMER_HABIT, habit })
       } else {
         dispatch(errorMsg(doc.status))
       }
@@ -52,11 +52,11 @@ export const checkHabit = userhabit => {
   }
 }
 
-export const endHabit = userhabit => {
+export const endHabit = habit => {
   return dispatch => {
-    return deleteDoc(dbUrl, headers, userhabit).then(res => res.json()).then(doc => {
+    return deleteDoc(dbUrl, headers, habit).then(res => res.json()).then(doc => {
       if (doc.ok) {
-        dispatch({ type: actionTypes.DELETE_USERHABIT, userhabit })
+        dispatch({ type: actionTypes.DELETE_CUSTOMER_HABIT, habit })
       } else {
         dispatch(errorMsg(doc.status))
       }
