@@ -5,8 +5,10 @@ export const NavBarRouteMapper = {
   LeftButton: (route, navigator, index, navState) => {
     if (index === 0) {
       return (
-        <TouchableOpacity onPress={() => navigator.push({ id: 'habitlist', title: 'Habits' })}>
-          <Text style={[ styles.navBarLeftButton, styles.navBarButtonText ]}>
+        <TouchableOpacity
+          style={styles.navBarLeftButton}
+          onPress={() => navigator.push({ id: 'habitlist', title: 'Habits' })}>
+          <Text style={styles.navBarButtonText}>
             &#x276e;&#xA0;Habits
           </Text>
         </TouchableOpacity>
@@ -14,8 +16,10 @@ export const NavBarRouteMapper = {
     }
     const previousRoute = navState.routeStack[index - 1]
     return (
-      <TouchableOpacity onPress={() => navigator.pop()}>
-        <Text style={[ styles.navBarLeftButton, styles.navBarButtonText ]}>
+      <TouchableOpacity
+        style={styles.navBarLeftButton}
+        onPress={() => navigator.pop()}>
+        <Text style={styles.navBarButtonText}>
           &#x276e;&#xA0;{previousRoute.title}
         </Text>
       </TouchableOpacity>

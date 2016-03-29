@@ -1,14 +1,11 @@
 import React, { Alert, Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
+import { readHabitDoc } from '../utils/readHabitDoc'
 import ListHeader from '../components/ListHeader'
 import styles from './HabitListStyles'
-import dbUrl from '../constants/dbUrl'
-import { readDoc } from '../utils/readDoc'
 
 export default class HabitList extends Component {
   static propTypes = {
-    navigator: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired
   };
   constructor(props) {
     super(props)
@@ -17,13 +14,11 @@ export default class HabitList extends Component {
     this.pressRow = this.pressRow.bind(this)
   }
   componentDidMount() {
-    this.readHabits().then(data => this.setState({ data }))
+    this.fetchData().then(data => this.setState({ data }))
   }
-  async readHabits() {
+  async fetchData() {
     try {
-      let res = await readDoc(`${dbUrl}/habit`)
-      let data = await res.json()
-      return data
+      return await readHabitDoc()
     } catch(err) {
       Alert.alert(null, err)
     }

@@ -1,7 +1,7 @@
 import React, { Component, Navigator, View } from 'react-native'
 import Dashboard from '../containers/Dashboard'
 import HabitDetail from '../containers/HabitDetail'
-import HabitList from '../containers/HabitList'
+import HabitList from '../components/HabitList'
 import { NavBarRouteMapper } from '../components/NavBarRouteMapper'
 import styles from './MainStyles'
 
