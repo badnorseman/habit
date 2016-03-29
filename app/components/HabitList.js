@@ -18,8 +18,7 @@ export default class HabitList extends Component {
   }
   async readHabits() {
     try {
-      let data = await readHabitDoc()
-      return data
+      return await readHabitDoc()
     } catch(err) {
       Alert.alert(null, err)
     }
