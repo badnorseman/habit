@@ -18,11 +18,11 @@ export default class HabitList extends Component {
     this.pressRow = this.pressRow.bind(this)
   }
   componentDidMount() {
+    console.log(readHabits())
     this.setState({ data: readHabits() })
     this.props.actions.getHabits()
   }
   render() {
-    console.log(this.state.data)
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     const dataSource = ds.cloneWithRows(this.props.data.habits || [])
     const header = this.props.data.summary || 'Sorry, you can not select any habits.'
