@@ -6,9 +6,7 @@ import { readDoc } from '../utils/readDoc'
 
 export default class HabitList extends Component {
   static propTypes = {
-    navigator: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired
   };
   constructor(props) {
     super(props)
