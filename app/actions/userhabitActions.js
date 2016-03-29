@@ -1,6 +1,5 @@
 import * as actionTypes from '../constants/actionTypes'
 import dbUrl from '../constants/dbUrl'
-import headers from '../constants/headers'
 import { makeAction } from '../utils/makeAction'
 import { readAllDoc } from '../utils/readAllDoc'
 import { createDoc } from '../utils/createDoc'
@@ -10,7 +9,7 @@ import { updateDoc } from '../utils/updateDoc'
 const errorMsg = makeAction(actionTypes.ERROR, 'error')
 
 export const getUserhabits = () => dispatch => {
-  return readAllDoc(dbUrl, headers).then(res => res.json()).then(docs => {
+  return readAllDoc(dbUrl).then(res => res.json()).then(docs => {
     if (docs.rows) {
       const userhabits = docs.rows.map(row => (row.doc))
       dispatch({ type: actionTypes.GET_USERHABITS, userhabits })
@@ -25,7 +24,7 @@ export const startHabit = userhabit => {
   const uh = Object.assign({}, userhabit)
   uh.started = d.toJSON()
   return dispatch => {
-    return createDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
+    return createDoc(dbUrl, uh).then(res => res.json()).then(doc => {
       if (doc.ok) {
         [ uh._id, uh._rev ] = [ doc.id, doc.rev ]
         dispatch({ type: actionTypes.CREATE_USERHABIT, userhabit: uh })
@@ -41,7 +40,7 @@ export const checkHabit = userhabit => {
   const uh = Object.assign({}, userhabit)
   uh.checked = d.toJSON()
   return dispatch => {
-    return updateDoc(dbUrl, headers, uh).then(res => res.json()).then(doc => {
+    return updateDoc(dbUrl, uh).then(res => res.json()).then(doc => {
       if (doc.ok) {
         uh._rev = doc.rev
         dispatch({ type: actionTypes.UPDATE_USERHABIT, userhabit: uh })
@@ -54,7 +53,7 @@ export const checkHabit = userhabit => {
 
 export const endHabit = userhabit => {
   return dispatch => {
-    return deleteDoc(dbUrl, headers, userhabit).then(res => res.json()).then(doc => {
+    return deleteDoc(dbUrl, userhabit).then(res => res.json()).then(doc => {
       if (doc.ok) {
         dispatch({ type: actionTypes.DELETE_USERHABIT, userhabit })
       } else {

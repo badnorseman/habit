@@ -1,9 +1,7 @@
 import React, { Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
-// import { readHabits } from '../utils/readHabits'
 import ListHeader from '../components/ListHeader'
 import styles from './HabitListStyles'
 import dbUrl from '../constants/dbUrl'
-import headers from '../constants/headers'
 import { readDoc } from '../utils/readDoc'
 
 export default class HabitList extends Component {
@@ -26,11 +24,11 @@ export default class HabitList extends Component {
   }
   async readHabits() {
     try {
-      let res = await readDoc(`${dbUrl}/habit`, headers)
+      let res = await readDoc(`${dbUrl}/habit`)
       let json = await res.json()
       return json
     } catch(err) {
-      console.error(err)
+      return err
     }
   }
   render() {

@@ -1,5 +1,4 @@
 import dbUrl from '../constants/dbUrl'
-import headers from '../constants/headers'
 import { createDatabase } from '../utils/createDatabase'
 import { initializeCustomer } from '../utils/initializeCustomer'
 import { initializeHabit } from '../utils/initializeHabit'
@@ -12,8 +11,8 @@ export const initializeDatabase = () => {
     if (res.status !== 200) {
       return createDatabase(dbUrl).then(res => {
         if (res.status === 201) {
-          initializeCustomer(dbUrl, headers)
-          initializeHabit(dbUrl, headers)
+          initializeCustomer(dbUrl)
+          initializeHabit(dbUrl)
         }
       }).catch(err => err)
     }
