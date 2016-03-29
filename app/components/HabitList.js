@@ -17,23 +17,21 @@ export default class HabitList extends Component {
     this.pressRow = this.pressRow.bind(this)
   }
   componentDidMount() {
-    this.setState({ data: this.readHabits() })
-    this.props.actions.getHabits()
+    this.readHabits().then(data => this.setState({ data }))
   }
   async readHabits() {
     try {
       let res = await readDoc(`${dbUrl}/habit`)
-      let json = await res.json()
-      return json
+      let data = await res.json()
+      return data
     } catch(err) {
       Alert.alert(null, err)
     }
   }
   render() {
-    console.log(this.state.data['_65'])
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
-    const dataSource = ds.cloneWithRows(this.props.data.habits || [])
-    const header = this.props.data.summary || 'Sorry, you can not select any habits.'
+    const dataSource = ds.cloneWithRows(this.state.data.habits || [])
+    const header = this.state.data.summary || 'Sorry, you can not select any habits.'
     return (
       <View style={styles.container}>
         <ListHeader header={header} />
@@ -57,7 +55,7 @@ export default class HabitList extends Component {
   }
   pressRow(rowData: {}) {
     this.props.navigator.push({
-      id: 'habitdetail', title: rowData.title, data: rowData, actions: this.props.actions
+      id: 'habitdetail', title: rowData.title, data: rowData
     })
   }
 }
