@@ -3,6 +3,7 @@ import { createDoc } from '../utils/createDoc'
 export const initializeCustomer = dbUrl => {
   const d = new Date()
   const data = {
+    _id: 'customer',
     type: 'customer',
     created: d.toJSON()
   }

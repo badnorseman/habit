@@ -4,10 +4,11 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 import * as reducers from '../reducers/reducers'
+import dbUrl from '../constants/dbUrl'
 import { initializeDatabase } from '../utils/initializeDatabase'
 import Main from '../components/Main'
 
-initializeDatabase()
+initializeDatabase(dbUrl)
 
 const logger = createLogger()
 
