@@ -31,7 +31,7 @@ export default class HabitDetail extends Component {
       </View>
       <View>
         {(checkable) && <Button onPress={() => {
-          actions.checkHabit(data)
+          actions.checkUserHabit(data)
           navigator.pop()
         }}>
           <View style={styles.buttonContainer}>
@@ -40,7 +40,7 @@ export default class HabitDetail extends Component {
         </Button>}
         {(data.started) ?
           <Button onPress={() => {
-            actions.endHabit(data)
+            actions.endUserHabit(data)
             navigator.pop()
           }}>
             <View style={styles.buttonContainer}>
@@ -48,7 +48,7 @@ export default class HabitDetail extends Component {
             </View>
           </Button> :
           <Button onPress={() => {
-            actions.startHabit(data)
+            actions.startUserHabit(data)
             navigator.pop()
           }}>
             <View style={styles.buttonContainer}>
