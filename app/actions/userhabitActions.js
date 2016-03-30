@@ -11,7 +11,9 @@ const errorMsg = makeAction(actionTypes.ERROR, 'error')
 export const getUserhabits = () => dispatch => {
   return readAllDoc(dbUrl).then(res => res.json()).then(docs => {
     if (docs.rows) {
-      const userhabits = docs.rows.map(row => (row.doc))
+      const userhabits = docs.rows.map(row => {
+        return row.doc
+      })
       dispatch({ type: actionTypes.GET_USERHABITS, userhabits })
     } else {
       dispatch(errorMsg(docs.status))
