@@ -1,8 +1,7 @@
 import headers from '../constants/headers'
 
-export const deleteDoc = (dbUrl, data) => {
-  const { _id, _rev } = data
-  return fetch(`${dbUrl}/${_id}?rev=${_rev}`, {
+export const deleteDoc = url => {
+  return fetch(url, {
     method: 'DELETE',
     headers
   })
