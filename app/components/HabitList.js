@@ -1,5 +1,5 @@
 import React, { Alert, Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
-import { readHabitDoc } from '../utils/readHabitDoc'
+import { readHabits } from '../utils/readHabits'
 import ListHeader from '../components/ListHeader'
 import styles from './HabitListStyles'
 
@@ -18,7 +18,7 @@ export default class HabitList extends Component {
   }
   async readHabits() {
     try {
-      return await readHabitDoc()
+      return await readHabits()
     } catch(err) {
       Alert.alert(null, err)
     }
