@@ -5,7 +5,6 @@ import { readAllDoc } from '../utils/readAllDoc'
 import { createDoc } from '../utils/createDoc'
 import { deleteDoc } from '../utils/deleteDoc'
 import { updateDoc } from '../utils/updateDoc'
-import { startHabit } from '../utils/startHabit'
 
 const errorMsg = makeAction(actionTypes.ERROR, 'error')
 
@@ -24,7 +23,6 @@ export const startUserHabit = userhabit => {
   const uh = Object.assign({}, userhabit)
   const d = new Date()
   uh.started = d.toJSON()
-  startHabit(uh)
   return dispatch => {
     return createDoc(dbUrl, uh).then(res => res.json()).then(doc => {
       if (doc.ok) {
