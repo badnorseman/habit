@@ -14,9 +14,9 @@ export default class HabitList extends Component {
     this.pressRow = this.pressRow.bind(this)
   }
   componentDidMount() {
-    this.fetchData().then(data => this.setState({ data }))
+    this.readHabits().then(data => this.setState({ data }))
   }
-  async fetchData() {
+  async readHabits() {
     try {
       return await readHabitDoc()
     } catch(err) {
