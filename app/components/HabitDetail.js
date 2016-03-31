@@ -1,5 +1,6 @@
 import React, { Component, PropTypes, Text, View } from 'react-native'
 import { startHabit } from '../utils/startHabit'
+import { endHabit } from '../utils/endHabit'
 import Button from '../components/Button'
 import styles from './HabitDetailStyles'
 
@@ -42,6 +43,7 @@ export default class HabitDetail extends Component {
         {(data.started) ?
           <Button onPress={() => {
             actions.endUserHabit(data)
+            endHabit(data)
             navigator.pop()
           }}>
             <View style={styles.buttonContainer}>
