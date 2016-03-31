@@ -1,5 +1,6 @@
 import React, { Component, PropTypes, Text, View } from 'react-native'
 import { startHabit } from '../utils/startHabit'
+import { checkHabit } from '../utils/checkHabit'
 import { endHabit } from '../utils/endHabit'
 import Button from '../components/Button'
 import styles from './HabitDetailStyles'
@@ -34,6 +35,7 @@ export default class HabitDetail extends Component {
       <View>
         {(checkable) && <Button onPress={() => {
           actions.checkUserHabit(data)
+          checkHabit(data)
           navigator.pop()
         }}>
           <View style={styles.buttonContainer}>

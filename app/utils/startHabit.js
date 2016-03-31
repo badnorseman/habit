@@ -7,7 +7,7 @@ export const startHabit = h => {
   const d = new Date()
 
   return readDoc(url).then(res => {
-    if (res.status == 200) {
+    if (res.status === 200) {
       res.json().then(doc => {
         doc.habits = Object.assign({}, doc.habits, { [h.title]: { started: d.toJSON() } })
         return updateDoc(url, doc).then(res => res).catch(err => err)

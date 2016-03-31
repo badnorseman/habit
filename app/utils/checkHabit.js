@@ -1,15 +1,24 @@
 import dbUrl from '../constants/dbUrl'
+import { readDoc } from '../utils/readDoc'
 import { updateDoc } from '../utils/updateDoc'
 
 export const checkHabit = h => {
+  const url = `${dbUrl}/customer`
   const d = new Date()
-  const data = {
-    habits: {
-      title: h.title,
-      checked: d.toJSON()
+
+  return readDoc(url).then(res => {
+    if (res.status === 200) {
+      res.json().then(doc => {
+        doc.habits = Object.assign({}, doc.habits,
+          Object.keys(doc.habits).reduce((result, i) => {
+            if (i === h.title) {
+              doc.habits[i].checked = d.toJSON()
+              result[i] = doc.habits[i]
+            }
+            return result
+          }, {}))
+        return updateDoc(url, doc).then(res => res).catch(err => err)
+      })
     }
-  }
-  return updateDoc(`${dbUrl}/customer`, data).then(res => res.json()).then(doc => {
-    return doc
   }).catch(err => err)
 }

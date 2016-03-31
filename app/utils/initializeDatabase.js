@@ -8,7 +8,7 @@ export const initializeDatabase = () => {
   return readDatabase(dbUrl).then(res => {
     if (res.status !== 200) {
       return createDatabase(dbUrl).then(res => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           initializeCustomer()
           initializeHabits()
         }
