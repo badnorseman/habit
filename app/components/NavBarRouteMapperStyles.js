@@ -14,5 +14,10 @@ export default StyleSheet.create({
     height: 100,
     paddingLeft: 16,
     width: 100
+  },
+  navBarRightButton: {
+    height: 100,
+    alignItems: 'center',
+    width: 100
   }
 })

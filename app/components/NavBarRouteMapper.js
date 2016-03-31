@@ -1,5 +1,6 @@
 import React, { Text, TouchableOpacity } from 'react-native'
 import styles from './NavBarRouteMapperStyles'
+import { logAllDoc } from '../utils/logAllDoc'
 
 export const NavBarRouteMapper = {
   LeftButton: (route, navigator, index, navState) => {
@@ -25,6 +26,17 @@ export const NavBarRouteMapper = {
       </TouchableOpacity>
     )
   },
-  RightButton: () => { return null },
+  RightButton: () => {
+    // return null
+    return (
+      <TouchableOpacity
+        style={styles.navBarRightButton}
+        onPress={() => logAllDoc()}>
+        <Text style={styles.navBarButtonText}>
+          Log
+        </Text>
+      </TouchableOpacity>
+    )
+  },
   Title: (route) => <Text style={styles.navBarTitle}>{route.title}</Text>
 }

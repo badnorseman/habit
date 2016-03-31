@@ -1,8 +1,7 @@
 import headers from '../constants/headers'
 
-export const updateDoc = (dbUrl, data) => {
-  const { _id } = data
-  return fetch(`${dbUrl}/${_id}`, {
+export const updateDoc = (url, data) => {
+  return fetch(url, {
     method: 'PUT',
     headers,
     body: JSON.stringify(data)

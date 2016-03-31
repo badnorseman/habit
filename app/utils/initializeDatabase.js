@@ -1,15 +1,16 @@
 import dbUrl from '../constants/dbUrl'
 import { createDatabase } from '../utils/createDatabase'
+import { readDatabase } from '../utils/readDatabase'
 import { initializeCustomer } from '../utils/initializeCustomer'
-import { initializeHabit } from '../utils/initializeHabit'
+import { initializeHabits } from '../utils/initializeHabits'
 
 export const initializeDatabase = () => {
-  fetch(dbUrl).then(res => {
+  return readDatabase(dbUrl).then(res => {
     if (res.status !== 200) {
       return createDatabase(dbUrl).then(res => {
-        if (res.status === 201) {
-          initializeCustomer(dbUrl)
-          initializeHabit(dbUrl)
+        if (res.status == 200) {
+          initializeCustomer()
+          initializeHabits()
         }
       }).catch(err => err)
     }
