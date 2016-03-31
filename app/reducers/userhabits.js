@@ -9,7 +9,7 @@ export default function userhabits(state = {}, action = {}) {
           return result
         }, {}))
     case actionTypes.CREATE_USERHABIT:
-      return { ...state, [action.userhabit._id]: action.userhabit }
+      return Object.assign({}, state, { [action.userhabit._id]: action.userhabit })
     case actionTypes.UPDATE_USERHABIT:
       return Object.assign({}, state,
         Object.keys(state).reduce((result, uhId) => {
