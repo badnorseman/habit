@@ -1,10 +1,7 @@
 import dbUrl from '../constants/dbUrl'
 import { readDoc } from '../utils/readDoc'
 import { updateDoc } from '../utils/updateDoc'
-
-const calculatePoints = (lastChecked, points) => {
-  return points = points ? points + 100 : 100
-}
+import { addPoints } from '../utils/addPoints'
 
 export const checkHabit = h => {
   const url = `${dbUrl}/customer`
@@ -13,7 +10,7 @@ export const checkHabit = h => {
   return readDoc(url).then(res => {
     if (res.status === 200) {
       res.json().then(doc => {
-        doc.points = calculatePoints(doc.lastChecked, doc.points)
+        doc.points = addPoints(doc.points, doc.lastChecked)
         doc.lastChecked = d.toJSON()
         doc.habits = Object.assign({}, doc.habits,
           Object.keys(doc.habits).reduce((result, i) => {

@@ -1,25 +1,33 @@
-import React, { Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
+import React, { Alert, Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
+import { readCustomer } from '../utils/readCustomer'
 import ListHeader from '../components/ListHeader'
 import styles from './DashboardStyles'
 
 export default class Dashboard extends Component {
   static propTypes = {
-    navigator: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    navigator: PropTypes.object.isRequired
   };
   constructor(props) {
     super(props)
+    this.state = { data: {} }
     this.renderRow = this.renderRow.bind(this)
     this.pressRow = this.pressRow.bind(this)
   }
   componentDidMount() {
-    this.props.actions.getUserhabits()
+    this.readCustomer().then(data => this.setState({ data }))
+  }
+  async readCustomer() {
+    try {
+      return await readCustomer()
+    } catch(err) {
+      Alert.alert(null, err)
+    }
   }
   render() {
+    const { data } = this.state
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
-    const dataSource = ds.cloneWithRows(this.props.data || [])
-    const header = Object.keys(this.props.data).length === 0 ? 'Hey, I see nothing here. Let\'s select one of the habits and get started.' : 'Hey, let\'s do a habit.'
+    const dataSource = ds.cloneWithRows(data.habits || [])
+    const header = data.habits ? `Hey, your score is ${data.points}. Let\'s do a habit.` : 'Hey, I see nothing here. Let\'s start a habit.'
     return (
       <View style={styles.container}>
         <ListHeader header={header} />
@@ -35,7 +43,7 @@ export default class Dashboard extends Component {
     return (
       <TouchableOpacity key={`${sectionId}${rowId}`} onPress={() => this.pressRow(rowData)}>
         <View style={styles.rowContentContainer}>
-          <Text style={styles.rowContentHeader}>{rowData.title}</Text>
+          <Text style={styles.rowContentHeader}>{rowId}</Text>
           <Text style={styles.rowContentText} numberOfLines={2}>{rowData.summary}</Text>
         </View>
       </TouchableOpacity>

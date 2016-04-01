@@ -8,11 +8,10 @@ import styles from './HabitDetailStyles'
 export default class HabitDetail extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired
   };
   render() {
-    const { navigator, data, actions } = this.props
+    const { navigator, data } = this.props
     const started = new Date(data.started).toDateString()
     const checked = new Date(data.checked).toDateString()
     const checkable = data.started && !data.checked ? true :
@@ -34,7 +33,6 @@ export default class HabitDetail extends Component {
       </View>
       <View>
         {(checkable) && <Button onPress={() => {
-          actions.checkUserHabit(data)
           checkHabit(data)
           navigator.pop()
         }}>
@@ -44,7 +42,6 @@ export default class HabitDetail extends Component {
         </Button>}
         {(data.started) ?
           <Button onPress={() => {
-            actions.endUserHabit(data)
             endHabit(data)
             navigator.pop()
           }}>
@@ -53,7 +50,6 @@ export default class HabitDetail extends Component {
             </View>
           </Button> :
           <Button onPress={() => {
-            actions.startUserHabit(data)
             startHabit(data)
             navigator.pop()
           }}>
