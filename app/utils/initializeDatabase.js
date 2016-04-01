@@ -7,7 +7,7 @@ import { initializeHabits } from '../utils/initializeHabits'
 // Keep this while developing customer doc
 // import { deleteDoc } from '../utils/deleteDoc'
 // const id = 'customer'
-// const rev = '72-15d12c3b0bc61f5533215de6c4c2cf71'
+// const rev = '93-e3dcbd17e2e40daa95ea4ed9e59a18ed'
 
 export const initializeDatabase = () => {
   // deleteDoc(`${dbUrl}/${id}?rev=${rev}`)

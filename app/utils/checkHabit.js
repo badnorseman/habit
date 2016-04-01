@@ -11,11 +11,10 @@ export const checkHabit = habit => {
     if (res.status === 200) {
       res.json().then(doc => {
         doc.score = addPoints(doc.points, doc.lastChecked)
-        doc.lastChecked = d.toJSON()
         doc.habits = Object.assign({}, doc.habits,
           Object.keys(doc.habits).reduce((result, i) => {
             if (i === habit.id) {
-              doc.habits[i].checked = d.toJSON()
+              doc.habits[i].lastChecked = d.toJSON()
               result[i] = doc.habits[i]
             }
             return result
