@@ -27,7 +27,7 @@ export default class Dashboard extends Component {
     const { data } = this.state
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     const dataSource = ds.cloneWithRows(data.habits || [])
-    const header = data.habits ? `Hey, your score is ${data.points}. Let\'s do a habit.` : 'Hey, I see nothing here. Let\'s start a habit.'
+    const header = data.habits ? `Hey, your score is ${data.score}. Let\'s do a habit.` : 'Hey, I see nothing here. Let\'s start a habit.'
     return (
       <View style={styles.container}>
         <ListHeader header={header} />
@@ -41,7 +41,7 @@ export default class Dashboard extends Component {
   }
   renderRow(rowData: {}, sectionId: number, rowId: number) {
     return (
-      <TouchableOpacity key={`${sectionId}${rowId}`} onPress={() => this.pressRow(rowData)}>
+      <TouchableOpacity key={`${sectionId}${rowId}`} onPress={() => this.pressRow(rowData, rowId)}>
         <View style={styles.rowContentContainer}>
           <Text style={styles.rowContentHeader}>{rowId}</Text>
           <Text style={styles.rowContentText} numberOfLines={2}>{rowData.summary}</Text>
@@ -49,9 +49,8 @@ export default class Dashboard extends Component {
       </TouchableOpacity>
     )
   }
-  pressRow(rowData: {}) {
-    this.props.navigator.push({
-      id: 'habitdetail', title: rowData.title, data: rowData
-    })
+  pressRow(rowData: {}, rowId: number) {
+    const data = Object.assign({}, rowData, { ['id']: rowId })
+    this.props.navigator.push({ id: 'habitdetail', title: rowId, data })
   }
 }

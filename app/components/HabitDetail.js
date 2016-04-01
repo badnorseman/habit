@@ -13,9 +13,9 @@ export default class HabitDetail extends Component {
   render() {
     const { navigator, data } = this.props
     const started = new Date(data.started).toDateString()
-    const checked = new Date(data.checked).toDateString()
+    const lastChecked = new Date(data.lastChecked).toDateString()
     const checkable = data.started && !data.checked ? true :
-      Date.parse(checked) < Date.parse(new Date().toDateString()) ? true : false
+      Date.parse(lastChecked) < Date.parse(new Date().toDateString()) ? true : false
     return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -24,7 +24,7 @@ export default class HabitDetail extends Component {
             <Text style={styles.contentHeader}>My Activity</Text>
             <Text style={styles.contentText}>Started&#x20;{started}</Text>
             {(data.checked) &&
-              <Text style={styles.contentText}>Last checked&#x20;{checked}</Text>
+              <Text style={styles.contentText}>Last checked&#x20;{lastChecked}</Text>
             }
           </View>
         }

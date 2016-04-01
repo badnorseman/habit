@@ -10,7 +10,7 @@ export const initializeCustomer = () => {
         _id: 'customer',
         type: 'customer',
         created: d.toJSON(),
-        points: 0,
+        score: 0,
         habits: {}
       }
       return createDoc(dbUrl, data).then(res => res).catch(err => err)
