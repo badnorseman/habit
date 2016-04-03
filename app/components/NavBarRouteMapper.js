@@ -1,28 +1,27 @@
 import React, { Text, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import styles from './NavBarRouteMapperStyles'
 import { logAllDoc } from '../utils/logAllDoc'
 
 export const NavBarRouteMapper = {
-  LeftButton: (route, navigator, index, navState) => {
+  LeftButton: (route, navigator, index) => {
     if (index === 0) {
       return (
         <TouchableOpacity
           style={styles.navBarLeftButton}
           onPress={() => navigator.push({ id: 'habitlist', title: 'Habits' })}>
-          <Text style={styles.navBarButtonText}>
-            &#x276e;&#xA0;Habits
+          <Text>
+            <Icon name="chevron-left" style={styles.navBarButtonIcon} />
+            <Text style={styles.navBarButtonText}>Habits</Text>
           </Text>
         </TouchableOpacity>
       )
     }
-    const previousRoute = navState.routeStack[index - 1]
     return (
       <TouchableOpacity
         style={styles.navBarLeftButton}
         onPress={() => navigator.pop()}>
-        <Text style={styles.navBarButtonText}>
-          &#x276e;&#xA0;{previousRoute.title}
-        </Text>
+        <Icon name="chevron-left" style={styles.navBarButtonIcon} />
       </TouchableOpacity>
     )
   },
@@ -32,9 +31,7 @@ export const NavBarRouteMapper = {
       <TouchableOpacity
         style={styles.navBarRightButton}
         onPress={() => logAllDoc()}>
-        <Text style={styles.navBarButtonText}>
-          Log
-        </Text>
+        <Icon name="adb" style={styles.navBarButtonIcon} />
       </TouchableOpacity>
     )
   },
