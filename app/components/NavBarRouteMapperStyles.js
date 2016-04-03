@@ -8,20 +8,22 @@ export default StyleSheet.create({
   },
   navBarLeftButton: {
     height: 100,
-    width: 100
+    width: 100,
+    paddingLeft: 8,
+    alignItems: 'flex-start'
   },
   navBarRightButton: {
     height: 100,
-    width: 100
+    width: 100,
+    paddingRight: 8,
+    alignItems: 'flex-end'
   },
   navBarButtonText: {
     color: 'rgba(255,255,255,0.70)',
-    fontSize: 14,
-    marginBottom: 16
+    fontSize: 14
   },
   navBarButtonIcon: {
-    color: 'rgb(255,255,255)',
-    fontSize: 32,
-    alignSelf: 'center'
+    color: 'rgba(255,255,255,0.70)',
+    fontSize: 32
   }
 })

@@ -10,10 +10,7 @@ export const NavBarRouteMapper = {
         <TouchableOpacity
           style={styles.navBarLeftButton}
           onPress={() => navigator.push({ id: 'habitlist', title: 'Habits' })}>
-          <Text>
-            <Icon name="chevron-left" style={styles.navBarButtonIcon} />
-            <Text style={styles.navBarButtonText}>Habits</Text>
-          </Text>
+          <Text style={styles.navBarButtonText}>&#x276e;&#xA0;Habits</Text>
         </TouchableOpacity>
       )
     }
