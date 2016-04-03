@@ -10,12 +10,11 @@ export default class HabitDetail extends Component {
     navigator: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired
   };
-  handleResponse(data) {
+  change(data) {
     if (data.response && data.response.error) {
       Alert.alert(null, data.response.error)
     } else {
-      // navigator.pop()
-      this.props.navigator.replace({ id: 'dashboard', title: 'My Habits' })
+      this.props.navigator.resetTo({ id: 'dashboard', title: 'My Habits' })
     }
   }
   render() {
@@ -41,18 +40,18 @@ export default class HabitDetail extends Component {
       </View>
       <View>
         {(checkable) &&
-          <Button onPress={() => checkHabit(data).then(data => this.handleResponse(data))}>
+          <Button onPress={() => checkHabit(data).then(data => this.change(data))}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>CHECK</Text>
             </View>
         </Button>}
         {(data.started) ?
-          <Button onPress={() => endHabit(data).then(data => this.handleResponse(data))}>
+          <Button onPress={() => endHabit(data).then(data => this.change(data))}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>END</Text>
             </View>
           </Button> :
-          <Button onPress={() => startHabit(data).then(data => this.handleResponse(data))}>
+          <Button onPress={() => startHabit(data).then(data => this.change(data))}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>START</Text>
             </View>
