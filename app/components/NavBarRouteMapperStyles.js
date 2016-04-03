@@ -6,16 +6,19 @@ export default StyleSheet.create({
     color: 'rgb(255,255,255)',
     fontSize: 24
   },
+  touchable: {
+    width: 100
+  },
   navBarLeftButton: {
-    height: 100,
-    width: 100,
     paddingLeft: 8,
-    alignItems: 'flex-start'
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   navBarRightButton: {
-    height: 100,
-    width: 100,
     paddingRight: 8,
+    flex: 1,
     alignItems: 'flex-end'
   },
   navBarButtonText: {

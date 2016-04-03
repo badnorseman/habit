@@ -1,4 +1,4 @@
-import React, { Text, TouchableOpacity } from 'react-native'
+import React, { View, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styles from './NavBarRouteMapperStyles'
 import { logAllDoc } from '../utils/logAllDoc'
@@ -8,17 +8,22 @@ export const NavBarRouteMapper = {
     if (index === 0) {
       return (
         <TouchableOpacity
-          style={styles.navBarLeftButton}
+          style={styles.touchable}
           onPress={() => navigator.push({ id: 'habitlist', title: 'Habits' })}>
-          <Text style={styles.navBarButtonText}>&#x276e;&#xA0;Habits</Text>
+          <View style={styles.navBarLeftButton}>
+            <Icon name="chevron-left" style={styles.navBarButtonIcon} />
+            <Text style={styles.navBarButtonText}>Habits</Text>
+          </View>
         </TouchableOpacity>
       )
     }
     return (
       <TouchableOpacity
-        style={styles.navBarLeftButton}
+        style={styles.touchable}
         onPress={() => navigator.pop()}>
-        <Icon name="chevron-left" style={styles.navBarButtonIcon} />
+        <View style={styles.navBarLeftButton}>
+          <Icon name="chevron-left" style={styles.navBarButtonIcon} />
+        </View>
       </TouchableOpacity>
     )
   },
@@ -26,9 +31,11 @@ export const NavBarRouteMapper = {
     // return null
     return (
       <TouchableOpacity
-        style={styles.navBarRightButton}
+        style={styles.touchable}
         onPress={() => logAllDoc()}>
-        <Icon name="adb" style={styles.navBarButtonIcon} />
+        <View style={styles.navBarRightButton}>
+          <Icon name="adb" style={styles.navBarButtonIcon} />
+        </View>
       </TouchableOpacity>
     )
   },
