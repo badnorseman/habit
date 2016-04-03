@@ -23,12 +23,6 @@ export default class Dashboard extends Component {
       Alert.alert(null, err)
     }
   }
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.data !== this.state.data) {
-      console.log(nextState.data, this.state.data)
-    }
-    return nextState.data !== this.state.data
-  }
   render() {
     const { data } = this.state
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })

@@ -3,7 +3,7 @@ import { readDoc } from '../utils/readDoc'
 import { updateDoc } from '../utils/updateDoc'
 import { addPoints } from '../utils/addPoints'
 
-const json = res => res.json()
+const decodeJson = res => res.json()
 
 const checkResponse = res => {
   if (res.error) {
@@ -20,7 +20,7 @@ export const checkHabit = habit => {
   const d = new Date()
 
   return readDoc(url)
-    .then(json)
+    .then(decodeJson)
     .then(checkResponse)
     .then(doc => {
       doc.score = addPoints(doc.points, doc.lastChecked)

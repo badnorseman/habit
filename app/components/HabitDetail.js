@@ -47,16 +47,26 @@ export default class HabitDetail extends Component {
         </Button>}
         {(data.started) ?
           <Button onPress={() => {
-            endHabit(data)
-            navigator.pop()
+            endHabit(data).then(data => {
+              if (data.response && data.response.error) {
+                Alert.alert(null, data.response.error)
+              } else {
+                navigator.replace({ id: 'dashboard', title: 'My Habits' })
+              }
+            })
           }}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>END</Text>
             </View>
           </Button> :
           <Button onPress={() => {
-            startHabit(data)
-            navigator.pop()
+            startHabit(data).then(data => {
+              if (data.response && data.response.error) {
+                Alert.alert(null, data.response.error)
+              } else {
+                navigator.replace({ id: 'dashboard', title: 'My Habits' })
+              }
+            })
           }}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>START</Text>
