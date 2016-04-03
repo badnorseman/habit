@@ -10,8 +10,16 @@ export default class HabitDetail extends Component {
     navigator: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired
   };
+  handleResponse(data) {
+    if (data.response && data.response.error) {
+      Alert.alert(null, data.response.error)
+    } else {
+      // navigator.pop()
+      this.props.navigator.replace({ id: 'dashboard', title: 'My Habits' })
+    }
+  }
   render() {
-    const { navigator, data } = this.props
+    const { data } = this.props
     const started = new Date(data.started).toDateString()
     const lastChecked = new Date(data.lastChecked).toDateString()
     const checkable = data.started && !data.lastChecked ? true :
@@ -32,42 +40,19 @@ export default class HabitDetail extends Component {
         <Text style={styles.contentText}>{data.description}</Text>
       </View>
       <View>
-        {(checkable) && <Button onPress={() => {
-          checkHabit(data).then(data => {
-            if (data.response && data.response.error) {
-              Alert.alert(null, data.response.error)
-            } else {
-              navigator.replace({ id: 'dashboard', title: 'My Habits' })
-            }
-          })
-        }}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>CHECK</Text>
-          </View>
+        {(checkable) &&
+          <Button onPress={() => checkHabit(data).then(data => this.handleResponse(data))}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>CHECK</Text>
+            </View>
         </Button>}
         {(data.started) ?
-          <Button onPress={() => {
-            endHabit(data).then(data => {
-              if (data.response && data.response.error) {
-                Alert.alert(null, data.response.error)
-              } else {
-                navigator.replace({ id: 'dashboard', title: 'My Habits' })
-              }
-            })
-          }}>
+          <Button onPress={() => endHabit(data).then(data => this.handleResponse(data))}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>END</Text>
             </View>
           </Button> :
-          <Button onPress={() => {
-            startHabit(data).then(data => {
-              if (data.response && data.response.error) {
-                Alert.alert(null, data.response.error)
-              } else {
-                navigator.replace({ id: 'dashboard', title: 'My Habits' })
-              }
-            })
-          }}>
+          <Button onPress={() => startHabit(data).then(data => this.handleResponse(data))}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonText}>START</Text>
             </View>
