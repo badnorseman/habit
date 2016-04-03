@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, Text, View } from 'react-native'
+import React, { Alert, Component, PropTypes, Text, View } from 'react-native'
 import { startHabit } from '../utils/startHabit'
 import { checkHabit } from '../utils/checkHabit'
 import { endHabit } from '../utils/endHabit'
@@ -33,8 +33,13 @@ export default class HabitDetail extends Component {
       </View>
       <View>
         {(checkable) && <Button onPress={() => {
-          checkHabit(data)
-          navigator.pop()
+          checkHabit(data).then(data => {
+            if (data.response && data.response.error) {
+              Alert.alert(null, data.response.error)
+            } else {
+              navigator.replace({ id: 'dashboard', title: 'My Habits' })
+            }
+          })
         }}>
           <View style={styles.buttonContainer}>
             <Text style={styles.buttonText}>CHECK</Text>
