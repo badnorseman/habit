@@ -26,8 +26,10 @@ export const NavBarRouteMapper = {
   RightButton: () => {
     return null
     return (
-      <TouchableOpacity style={styles.navBarRightButton} onPress={() => logAllDoc()}>
-        <Icon name="adb" style={styles.navBarButtonIcon} />
+      <TouchableOpacity onPress={() => logAllDoc()}>
+        <View style={styles.navBarRightButton}>
+          <Icon name="adb" style={styles.navBarButtonIcon} />
+        </View>
       </TouchableOpacity>
     )
   },

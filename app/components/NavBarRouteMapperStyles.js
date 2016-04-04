@@ -11,19 +11,21 @@ export default StyleSheet.create({
     width: 100,
     flex: 1,
     flexDirection: 'row',
-    alignSelf: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   navBarRightButton: {
     paddingRight: 8,
     width: 100,
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-end'
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
   },
   navBarButtonText: {
     color: 'rgba(255,255,255,0.70)',
-    fontSize: 14
+    fontSize: 14,
+    marginLeft: -8
   },
   navBarButtonIcon: {
     color: 'rgba(255,255,255,0.70)',
