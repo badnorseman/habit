@@ -1,7 +1,7 @@
 import React, { View, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styles from './NavBarRouteMapperStyles'
-import { logAllDoc } from '../utils/logAllDoc'
+// import { logAllDoc } from '../utils/logAllDoc'
 
 export const NavBarRouteMapper = {
   LeftButton: (route, navigator, index) => {
@@ -23,10 +23,10 @@ export const NavBarRouteMapper = {
       </TouchableOpacity>
     )
   },
-  RightButton: () => {
-    return null
+  RightButton: (route, navigator) => {
+    // return null
     return (
-      <TouchableOpacity onPress={() => logAllDoc()}>
+      <TouchableOpacity onPress={() => navigator.push({ id: 'habitmain', title: 'Habits' })}>
         <View style={styles.navBarRightButton}>
           <Icon name="adb" style={styles.navBarButtonIcon} />
         </View>

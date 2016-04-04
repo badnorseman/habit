@@ -26,7 +26,7 @@ export default class HabitMain extends Component {
             selected={this.state.tab === 1}
             onPress={() => this.setTab(1)}
           >
-            <View><Text>{this.state}</Text></View>
+            <View><Text>Tab 1</Text></View>
           </Icon.TabBarItemIOS>
           <Icon.TabBarItemIOS
             title="Start"
@@ -35,7 +35,7 @@ export default class HabitMain extends Component {
             selected={this.state.tab === 2}
             onPress={() => this.setTab(2)}
           >
-            <View><Text>{this.state}</Text></View>
+            <View><Text>Tab 2</Text></View>
           </Icon.TabBarItemIOS>
         </TabBarIOS>
       </View>
