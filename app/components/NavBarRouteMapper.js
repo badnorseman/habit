@@ -24,7 +24,7 @@ export const NavBarRouteMapper = {
     )
   },
   RightButton: () => {
-    // return null
+    return null
     return (
       <TouchableOpacity style={styles.navBarRightButton} onPress={() => logAllDoc()}>
         <Icon name="adb" style={styles.navBarButtonIcon} />
