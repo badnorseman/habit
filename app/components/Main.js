@@ -1,6 +1,6 @@
 import React, { Component, Navigator, View } from 'react-native'
-import Dashboard from '../containers/Dashboard'
-import HabitDetail from '../containers/HabitDetail'
+import Dashboard from '../components/Dashboard'
+import HabitDetail from '../components/HabitDetail'
 import HabitList from '../components/HabitList'
 import { NavBarRouteMapper } from '../components/NavBarRouteMapper'
 import styles from './MainStyles'

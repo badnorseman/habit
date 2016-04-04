@@ -6,18 +6,27 @@ export default StyleSheet.create({
     color: 'rgb(255,255,255)',
     fontSize: 24
   },
+  navBarLeftButton: {
+    paddingLeft: 8,
+    width: 100,
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    alignItems: 'center'
+  },
+  navBarRightButton: {
+    paddingRight: 8,
+    width: 100,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end'
+  },
   navBarButtonText: {
     color: 'rgba(255,255,255,0.70)',
     fontSize: 14
   },
-  navBarLeftButton: {
-    height: 100,
-    paddingLeft: 16,
-    width: 100
-  },
-  navBarRightButton: {
-    height: 100,
-    alignItems: 'center',
-    width: 100
+  navBarButtonIcon: {
+    color: 'rgba(255,255,255,0.70)',
+    fontSize: 32
   }
 })

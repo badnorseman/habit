@@ -49,8 +49,6 @@ export default class HabitList extends Component {
     )
   }
   pressRow(rowData: {}) {
-    this.props.navigator.push({
-      id: 'habitdetail', title: rowData.title, data: rowData
-    })
+    this.props.navigator.push({ id: 'habitdetail', title: rowData.title, data: rowData })
   }
 }

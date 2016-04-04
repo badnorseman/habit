@@ -10,7 +10,10 @@ export const initializeHabits = () => {
         _id: 'habit',
         type: 'habit',
         summary: habits.summary,
-        habits: habits.habits
+        habits: habits.habits.reduce((result, i) => {
+          result[i.title] = i
+          return result
+        }, {})
       }
       return createDoc(dbUrl, data).then(res => res).catch(err => err)
     }
