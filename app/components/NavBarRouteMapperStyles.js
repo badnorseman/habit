@@ -11,13 +11,14 @@ export default StyleSheet.create({
     width: 100,
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
+    alignSelf: 'flex-start',
+    alignItems: 'center'
   },
   navBarRightButton: {
     paddingRight: 8,
     width: 100,
     flex: 1,
+    flexDirection: 'column',
     alignItems: 'flex-end'
   },
   navBarButtonText: {
