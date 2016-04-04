@@ -23,7 +23,7 @@ export const checkHabit = habit => {
     .then(decodeJson)
     .then(checkResponse)
     .then(doc => {
-      doc.score =+ addPoints(doc.lastChecked)
+      doc.score += addPoints(doc.lastChecked)
       doc.habits = Object.assign({}, doc.habits,
         Object.keys(doc.habits).reduce((result, i) => {
           if (i === habit.id) {
