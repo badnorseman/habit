@@ -1,11 +1,10 @@
 import React, { Alert, Component, PropTypes, Text, View } from 'react-native'
-import { startHabit } from '../utils/startHabit'
 import { checkHabit } from '../utils/checkHabit'
 import { endHabit } from '../utils/endHabit'
 import Button from '../components/Button'
-import styles from './HabitDetailStyles'
+import styles from './ActivityDetailStyles'
 
-export default class HabitDetail extends Component {
+export default class ActivityDetail extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired
@@ -26,17 +25,11 @@ export default class HabitDetail extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.contentContainer}>
-          {(data.started) &&
-            <View>
-              <Text style={styles.contentHeader}>My Activity</Text>
-              <Text style={styles.contentText}>Started&#x20;{started}</Text>
-              {(data.lastChecked) &&
-                <Text style={styles.contentText}>Last checked&#x20;{lastChecked}</Text>
-              }
-            </View>
+          <Text style={styles.contentHeader}>My Activity</Text>
+          <Text style={styles.contentText}>Started&#x20;{started}</Text>
+          {(data.lastChecked) &&
+            <Text style={styles.contentText}>Last checked&#x20;{lastChecked}</Text>
           }
-          <Text style={styles.contentHeader}>{data.summary}</Text>
-          <Text style={styles.contentText}>{data.description}</Text>
         </View>
         <View>
           {(checkable) &&
@@ -46,18 +39,11 @@ export default class HabitDetail extends Component {
               </View>
             </Button>
           }
-          {(data.started) ?
-            <Button onPress={() => endHabit(data).then(data => this.change(data))}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>END</Text>
-              </View>
-            </Button> :
-            <Button onPress={() => startHabit(data).then(data => this.change(data))}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>START</Text>
-              </View>
-            </Button>
-          }
+          <Button onPress={() => endHabit(data).then(data => this.change(data))}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonText}>END</Text>
+            </View>
+          </Button>
         </View>
       </View>
     )

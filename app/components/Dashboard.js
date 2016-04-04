@@ -51,6 +51,6 @@ export default class Dashboard extends Component {
   }
   pressRow(rowData: {}, rowId: number) {
     const data = Object.assign({}, rowData, { ['id']: rowId })
-    this.props.navigator.push({ id: 'habitdetail', title: rowId, data })
+    this.props.navigator.push({ id: 'activitydetail', title: rowId, data })
   }
 }

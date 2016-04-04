@@ -1,4 +1,5 @@
 import React, { Component, Navigator, View } from 'react-native'
+import ActivityDetail from '../components/ActivityDetail'
 import Dashboard from '../components/Dashboard'
 import HabitDetail from '../components/HabitDetail'
 import HabitList from '../components/HabitList'
@@ -25,6 +26,8 @@ export default class Main extends Component {
   }
   renderScene(route, navigator) {
     switch (route.id) {
+      case 'activitydetail':
+        return (<ActivityDetail navigator={navigator} data={route.data} />)
       case 'dashboard':
         return (<Dashboard navigator={navigator} />)
       case 'habitlist':
