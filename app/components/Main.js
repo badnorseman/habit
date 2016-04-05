@@ -3,7 +3,6 @@ import ActivityDetail from '../components/ActivityDetail'
 import Dashboard from '../components/Dashboard'
 import HabitDetail from '../components/HabitDetail'
 import HabitList from '../components/HabitList'
-import HabitMain from '../components/HabitMain'
 import { NavBarRouteMapper } from '../components/NavBarRouteMapper'
 import styles from './MainStyles'
 
@@ -35,8 +34,6 @@ export default class Main extends Component {
         return (<HabitDetail navigator={navigator} data={route.data} />)
       case 'habitlist':
         return (<HabitList navigator={navigator} />)
-      case 'habitmain':
-        return (<HabitMain navigator={navigator} />)
     }
   }
   renderNavBar() {
