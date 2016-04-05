@@ -1,7 +1,7 @@
-import React, { Alert, Component, PropTypes, Text, View } from 'react-native'
+import React, { Alert, Component, PropTypes, TabBarIOS, Text, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import { checkHabit } from '../utils/checkHabit'
 import { endHabit } from '../utils/endHabit'
-import Button from '../components/Button'
 import styles from './ActivityDetailStyles'
 
 export default class ActivityDetail extends Component {
@@ -17,35 +17,41 @@ export default class ActivityDetail extends Component {
     }
   }
   render() {
-    const { data } = this.props
+    const { navigator, data } = this.props
     const started = new Date(data.started).toDateString()
     const lastChecked = new Date(data.lastChecked).toDateString()
     const checkable = data.started && !data.lastChecked ? true :
       Date.parse(lastChecked) < Date.parse(new Date().toDateString()) ? true : false
+    const barTintColor = 'rgb(0,121,107)'
+    const tintColor = 'rgb(255,255,255)'
     return (
-      <View style={styles.container}>
-        <View style={styles.contentContainer}>
-          <Text style={styles.contentHeader}>My Activity</Text>
-          <Text style={styles.contentText}>Started&#x20;{started}</Text>
-          {(data.lastChecked) &&
-            <Text style={styles.contentText}>Last checked&#x20;{lastChecked}</Text>
-          }
-        </View>
-        <View>
-          {(checkable) &&
-            <Button onPress={() => checkHabit(data).then(data => this.change(data))}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>CHECK</Text>
-              </View>
-            </Button>
-          }
-          <Button onPress={() => endHabit(data).then(data => this.change(data))}>
-            <View style={styles.buttonContainer}>
-              <Text style={styles.buttonText}>END</Text>
-            </View>
-          </Button>
-        </View>
-      </View>
+      <TabBarIOS barTintColor={barTintColor} tintColor={tintColor}>
+        <Icon.TabBarItemIOS
+          iconName="arrow-back"
+          selected={true}
+          onPress={() => navigator.resetTo({ id: 'dashboard', title: 'My Habits' })}>
+          <View style={styles.container}>
+            <Text style={styles.contentHeader}>My Activity</Text>
+            <Text style={styles.contentText}>Started&#x20;{started}</Text>
+            {(data.lastChecked) &&
+              <Text style={styles.contentText}>Last checked&#x20;{lastChecked}</Text>
+            }
+          </View>
+        </Icon.TabBarItemIOS>
+        <Icon.TabBarItemIOS
+          iconName="delete"
+          selected={false}
+          onPress={() => endHabit(data).then(data => this.change(data))}>
+        </Icon.TabBarItemIOS>
+        {(checkable) &&
+          <Icon.TabBarItemIOS
+            iconName="check"
+            iconSize={36}
+            selected={false}
+            onPress={() => checkHabit(data).then(data => this.change(data))}>
+          </Icon.TabBarItemIOS>
+        }
+      </TabBarIOS>
     )
   }
 }

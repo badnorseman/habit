@@ -1,6 +1,7 @@
-import React, { Alert, Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
-import { readCustomer } from '../utils/readCustomer'
+import React, { Alert, Component, ListView, PropTypes, TabBarIOS, Text, TouchableOpacity, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import ListHeader from '../components/ListHeader'
+import { readCustomer } from '../utils/readCustomer'
 import styles from './DashboardStyles'
 
 export default class Dashboard extends Component {
@@ -24,19 +25,34 @@ export default class Dashboard extends Component {
     }
   }
   render() {
+    const { navigator } = this.props
     const { data } = this.state
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     const dataSource = ds.cloneWithRows(data.habits || [])
     const header = data.habits ? `Hey, your score is ${data.score}. Let\'s do a habit.` : 'Hey, I see nothing here. Let\'s start a habit.'
+    const barTintColor = 'rgb(0,121,107)'
+    const tintColor = 'rgb(255,255,255)'
     return (
-      <View style={styles.container}>
-        <ListHeader header={header} />
-        <ListView
-          automaticallyAdjustContentInsets={false}
-          dataSource={dataSource}
-          renderRow={this.renderRow}
-        />
-      </View>
+      <TabBarIOS barTintColor={barTintColor} tintColor={tintColor}>
+        <Icon.TabBarItemIOS
+          iconName="home"
+          selected={false}
+          onPress={() => navigator.resetTo({ id: 'habitlist', title: 'Habits' })}>
+        </Icon.TabBarItemIOS>
+        <Icon.TabBarItemIOS
+          iconName="favorite-border"
+          iconSize={24}
+          selected={true}
+          onPress={() => navigator.resetTo({ id: 'dashboard', title: 'My Habits' })}>
+          <View style={styles.container}>
+            <ListHeader header={header} />
+            <ListView
+              automaticallyAdjustContentInsets={false}
+              dataSource={dataSource}
+              renderRow={this.renderRow} />
+          </View>
+        </Icon.TabBarItemIOS>
+      </TabBarIOS>
     )
   }
   renderRow(rowData: {}, sectionId: number, rowId: number) {

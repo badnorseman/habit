@@ -1,6 +1,7 @@
-import React, { Alert, Component, ListView, PropTypes, Text, TouchableOpacity, View } from 'react-native'
-import { readHabits } from '../utils/readHabits'
+import React, { Alert, Component, ListView, PropTypes, TabBarIOS, Text, TouchableOpacity, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import ListHeader from '../components/ListHeader'
+import { readHabits } from '../utils/readHabits'
 import styles from './HabitListStyles'
 
 export default class HabitList extends Component {
@@ -24,18 +25,33 @@ export default class HabitList extends Component {
     }
   }
   render() {
+    const { navigator } = this.props
+    const { data } = this.state
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
-    const dataSource = ds.cloneWithRows(this.state.data.habits || [])
-    const header = this.state.data.summary || 'Sorry, you can not select any habits.'
+    const dataSource = ds.cloneWithRows(data.habits || [])
+    const header = data.summary || 'Sorry, you can not select any habits.'
+    const barTintColor = 'rgb(0,121,107)'
+    const tintColor = 'rgb(255,255,255)'
     return (
-      <View style={styles.container}>
-        <ListHeader header={header} />
-        <ListView
-          automaticallyAdjustContentInsets={false}
-          dataSource={dataSource}
-          renderRow={this.renderRow}
-        />
-      </View>
+      <TabBarIOS barTintColor={barTintColor} tintColor={tintColor}>
+        <Icon.TabBarItemIOS
+          iconName="home"
+          selected={true}
+          onPress={() => navigator.resetTo({ id: 'habitlist', title: 'Habits' })}>
+          <View style={styles.container}>
+            <ListHeader header={header} />
+            <ListView
+              automaticallyAdjustContentInsets={false}
+              dataSource={dataSource}
+              renderRow={this.renderRow} />
+          </View>
+        </Icon.TabBarItemIOS>
+        <Icon.TabBarItemIOS
+          iconName="favorite-border"
+          selected={false}
+          onPress={() => navigator.resetTo({ id: 'dashboard', title: 'My Habits' })}>
+        </Icon.TabBarItemIOS>
+      </TabBarIOS>
     )
   }
   renderRow(rowData: {}, sectionId: number, rowId: number) {

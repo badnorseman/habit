@@ -1,6 +1,6 @@
-import React, { Alert, Component, PropTypes, Text, View } from 'react-native'
+import React, { Alert, Component, PropTypes, TabBarIOS, Text, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import { startHabit } from '../utils/startHabit'
-import Button from '../components/Button'
 import styles from './HabitDetailStyles'
 
 export default class HabitDetail extends Component {
@@ -16,24 +16,29 @@ export default class HabitDetail extends Component {
     }
   }
   render() {
-    const { data } = this.props
+    const { navigator, data } = this.props
     const startable = data.started ? false : true
+    const barTintColor = 'rgb(0,121,107)'
+    const tintColor = 'rgb(255,255,255)'
     return (
-      <View style={styles.container}>
-        <View style={styles.contentContainer}>
-          <Text style={styles.contentHeader}>{data.summary}</Text>
-          <Text style={styles.contentText}>{data.description}</Text>
-        </View>
-        <View>
-          {(startable) &&
-            <Button onPress={() => startHabit(data).then(data => this.change(data))}>
-              <View style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>START</Text>
-              </View>
-            </Button>
-          }
-        </View>
-      </View>
+      <TabBarIOS barTintColor={barTintColor} tintColor={tintColor}>
+        <Icon.TabBarItemIOS
+          iconName="arrow-back"
+          selected={true}
+          onPress={() => navigator.resetTo({ id: 'habitlist', title: 'Habits' })}>
+          <View style={styles.container}>
+            <Text style={styles.contentHeader}>{data.summary}</Text>
+            <Text style={styles.contentText}>{data.description}</Text>
+          </View>
+        </Icon.TabBarItemIOS>
+        {(startable) &&
+          <Icon.TabBarItemIOS
+            iconName="add"
+            selected={false}
+            onPress={() => startHabit(data).then(data => this.change(data))}>
+          </Icon.TabBarItemIOS>
+        }
+      </TabBarIOS>
     )
   }
 }
