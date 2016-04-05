@@ -6,8 +6,6 @@ initializeDatabase()
 
 export default class App extends Component {
   render() {
-    return (
-      <Main />
-    )
+    return (<Main />)
   }
 }

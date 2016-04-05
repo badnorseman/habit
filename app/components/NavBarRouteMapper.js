@@ -24,14 +24,17 @@ export const NavBarRouteMapper = {
     )
   },
   RightButton: (route, navigator) => {
-    // return null
-    return (
-      <TouchableOpacity onPress={() => navigator.push({ id: 'habitmain', title: 'Habits' })}>
-        <View style={styles.navBarRightButton}>
-          <Icon name="adb" style={styles.navBarButtonIcon} />
-        </View>
-      </TouchableOpacity>
-    )
+    if (__DEV__) {
+      return (
+        <TouchableOpacity onPress={() => navigator.push({ id: 'habitmain', title: 'Habits' })}>
+          <View style={styles.navBarRightButton}>
+            <Icon name="adb" style={styles.navBarButtonIcon} />
+          </View>
+        </TouchableOpacity>
+      )
+    } else {
+      return null
+    }
   },
   Title: (route) => <Text style={styles.navBarTitle}>{route.title}</Text>
 }
