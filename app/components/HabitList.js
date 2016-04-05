@@ -47,7 +47,7 @@ export default class HabitList extends Component {
           </View>
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
-          iconName="favorite-border"
+          iconName="star"
           selected={false}
           onPress={() => navigator.resetTo({ id: 'dashboard', title: 'My Habits' })}>
         </Icon.TabBarItemIOS>
