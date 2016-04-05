@@ -39,13 +39,13 @@ export default class ActivityDetail extends Component {
           </View>
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
-          iconName="delete"
+          iconName="remove-circle"
           selected={false}
           onPress={() => endHabit(data).then(data => this.change(data))}>
         </Icon.TabBarItemIOS>
         {(checkable) &&
           <Icon.TabBarItemIOS
-            iconName="check"
+            iconName="check-circle"
             selected={false}
             onPress={() => checkHabit(data).then(data => this.change(data))}>
           </Icon.TabBarItemIOS>

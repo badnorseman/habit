@@ -33,7 +33,7 @@ export default class HabitDetail extends Component {
         </Icon.TabBarItemIOS>
         {(startable) &&
           <Icon.TabBarItemIOS
-            iconName="add"
+            iconName="add-circle"
             selected={false}
             onPress={() => startHabit(data).then(data => this.change(data))}>
           </Icon.TabBarItemIOS>
