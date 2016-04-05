@@ -40,8 +40,7 @@ export default class Dashboard extends Component {
           onPress={() => navigator.resetTo({ id: 'habitlist', title: 'Habits' })}>
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
-          iconName="favorite-border"
-          iconSize={24}
+          iconName="star"
           selected={true}
           onPress={() => navigator.resetTo({ id: 'dashboard', title: 'My Habits' })}>
           <View style={styles.container}>

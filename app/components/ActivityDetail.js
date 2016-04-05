@@ -46,7 +46,6 @@ export default class ActivityDetail extends Component {
         {(checkable) &&
           <Icon.TabBarItemIOS
             iconName="check"
-            iconSize={36}
             selected={false}
             onPress={() => checkHabit(data).then(data => this.change(data))}>
           </Icon.TabBarItemIOS>
