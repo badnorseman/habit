@@ -23,7 +23,7 @@ export const startHabit = habit => {
     .then(checkResponse)
     .then(doc => {
       doc.habits = Object.assign({}, doc.habits,
-        { [habit.title]: { started: d.toJSON() } })
+        { [habit.title]: { points: 0, started: d.toJSON() } })
       return doc
     })
     .then(doc => updateDoc(url, doc))

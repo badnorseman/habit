@@ -36,6 +36,7 @@ export default class ActivityDetail extends Component {
             {(data.lastChecked) &&
               <Text style={styles.contentText}>Last checked&#x20;{lastChecked}</Text>
             }
+            <Text style={styles.contentText}>Points&#x20;{data.points}</Text>
           </View>
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
