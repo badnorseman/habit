@@ -55,11 +55,12 @@ export default class Dashboard extends Component {
     )
   }
   renderRow(rowData: {}, sectionId: number, rowId: number) {
+    const points = `${rowData.points} points`
     return (
       <TouchableOpacity key={`${sectionId}${rowId}`} onPress={() => this.pressRow(rowData, rowId)}>
         <View style={styles.rowContentContainer}>
           <Text style={styles.rowContentHeader}>{rowId}</Text>
-          <Text style={styles.rowContentText} numberOfLines={2}>{rowData.summary}</Text>
+          <Text style={styles.rowContentText} numberOfLines={2}>{points}</Text>
         </View>
       </TouchableOpacity>
     )
