@@ -1,6 +1,6 @@
 import dbUrl from '../constants/dbUrl'
 import { readDoc } from '../utils/readDoc'
-import { updateDoc } from '../utils/updateDoc'
+import { deleteDoc } from '../utils/deleteDoc'
 
 const decodeJson = res => res.json()
 
@@ -14,20 +14,12 @@ const checkResponse = res => {
   }
 }
 
-export const startHabit = habit => {
+export const deleteCustomer = () => {
   const url = `${dbUrl}/customer`
-  const d = new Date()
 
   return readDoc(url)
     .then(decodeJson)
     .then(checkResponse)
-    .then(doc => {
-      doc.habits = Object.assign({}, doc.habits,
-        { [habit.title]: { score: 0, started: d.toJSON() } })
-      return doc
-    })
-    .then(doc => updateDoc(url, doc))
-    .then(checkResponse)
-    .then(doc => doc)
+    .then(doc => deleteDoc(`${url}?rev=${doc._rev}`))
     .catch(err => err)
 }
