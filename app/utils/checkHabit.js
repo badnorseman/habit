@@ -27,7 +27,7 @@ export const checkHabit = habit => {
       doc.habits = Object.assign({}, doc.habits,
         Object.keys(doc.habits).reduce((result, i) => {
           if (i === habit.id) {
-            const daysDiff = doc.habits[i].lastChecked ? getDaysDiff(doc.habits[i].lastChecked) : 2
+            const daysDiff = getDaysDiff(doc.habits[i].lastChecked)
             doc.habits[i].score += getPoints(daysDiff)
             doc.habits[i].lastChecked = d.toJSON()
             doc.totalScore += doc.habits[i].score

@@ -3,7 +3,7 @@ import { getDaysDiff } from '../app/utils/getDaysDiff'
 
 describe('utils', function () {
   describe('getDaysDiff', function () {
-    it('should return 0 days for undefined', function () {
+    it('should return -1 for undefined', function () {
       expect(getDaysDiff(undefined)).to.equal(-1)
     })
     it('should return 0 days for today', function () {
