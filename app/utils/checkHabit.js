@@ -1,7 +1,8 @@
 import dbUrl from '../constants/dbUrl'
 import { readDoc } from '../utils/readDoc'
 import { updateDoc } from '../utils/updateDoc'
-import { addPoints } from '../utils/addPoints'
+import { getPoints } from '../utils/getPoints'
+import { getDaysDiff } from '../utils/getDaysDiff'
 
 const decodeJson = res => res.json()
 
@@ -23,11 +24,13 @@ export const checkHabit = habit => {
     .then(decodeJson)
     .then(checkResponse)
     .then(doc => {
-      doc.score += addPoints(doc.lastChecked)
       doc.habits = Object.assign({}, doc.habits,
         Object.keys(doc.habits).reduce((result, i) => {
           if (i === habit.id) {
+            const daysDiff = getDaysDiff(doc.habits[i].lastChecked)
+            doc.habits[i].score += getPoints(daysDiff)
             doc.habits[i].lastChecked = d.toJSON()
+            doc.totalScore += doc.habits[i].score
             result[i] = doc.habits[i]
           }
           return result

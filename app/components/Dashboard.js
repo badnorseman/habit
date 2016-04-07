@@ -2,6 +2,7 @@ import React, { Alert, Component, ListView, PropTypes, TabBarIOS, Text, Touchabl
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import ListHeader from '../components/ListHeader'
 import { readCustomer } from '../utils/readCustomer'
+import { getDaysDiff } from '../utils/getDaysDiff'
 import styles from './DashboardStyles'
 
 export default class Dashboard extends Component {
@@ -29,7 +30,7 @@ export default class Dashboard extends Component {
     const { data } = this.state
     const ds = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
     const dataSource = ds.cloneWithRows(data.habits || [])
-    const header = data.habits ? `Hey, your score is ${data.score}. Let\'s do a habit.` : 'Hey, I see nothing here. Let\'s start a habit.'
+    const header = data.habits ? `Hey, your score is ${data.totalScore}.` : 'Hey, I see nothing here. Let\'s start a habit.'
     const barTintColor = 'rgb(0,121,107)'
     const tintColor = 'rgb(255,255,255)'
     return (
@@ -55,11 +56,23 @@ export default class Dashboard extends Component {
     )
   }
   renderRow(rowData: {}, sectionId: number, rowId: number) {
+    let rowText = ''
+    const daysDiff = getDaysDiff(rowData.lastChecked)
+    switch (daysDiff) {
+      case -1:
+        rowText = 'Let\'s get started!'; break
+      case 0:
+        rowText = 'You did it!'; break
+      case 1:
+        rowText = 'Let\'s repeat!'; break
+      default:
+        rowText = 'Don\'t be a stranger!'; break
+    }
     return (
       <TouchableOpacity key={`${sectionId}${rowId}`} onPress={() => this.pressRow(rowData, rowId)}>
         <View style={styles.rowContentContainer}>
           <Text style={styles.rowContentHeader}>{rowId}</Text>
-          <Text style={styles.rowContentText} numberOfLines={2}>{rowData.summary}</Text>
+          <Text style={styles.rowContentText} numberOfLines={2}>{rowText}</Text>
         </View>
       </TouchableOpacity>
     )

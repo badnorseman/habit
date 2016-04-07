@@ -24,6 +24,9 @@ export default class ActivityDetail extends Component {
       Date.parse(lastChecked) < Date.parse(new Date().toDateString()) ? true : false
     const barTintColor = 'rgb(0,121,107)'
     const tintColor = 'rgb(255,255,255)'
+    const startedText = `You started this habit on ${started}.`
+    const lastCheckedText = data.lastChecked ? `You did this habit last on ${lastChecked}.` : 'You haven\'t done this habit yet.'
+    const scoreText = `Your score for this habit is ${data.score} points.`
     return (
       <TabBarIOS barTintColor={barTintColor} tintColor={tintColor}>
         <Icon.TabBarItemIOS
@@ -32,10 +35,9 @@ export default class ActivityDetail extends Component {
           onPress={() => navigator.resetTo({ id: 'dashboard', title: 'My Habits' })}>
           <View style={styles.container}>
             <Text style={styles.contentHeader}>My Activity</Text>
-            <Text style={styles.contentText}>Started&#x20;{started}</Text>
-            {(data.lastChecked) &&
-              <Text style={styles.contentText}>Last checked&#x20;{lastChecked}</Text>
-            }
+            <Text style={styles.contentText}>{startedText}</Text>
+            <Text style={styles.contentText}>{lastCheckedText}</Text>
+            <Text style={styles.contentText}>{scoreText}</Text>
           </View>
         </Icon.TabBarItemIOS>
         <Icon.TabBarItemIOS
