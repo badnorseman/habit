@@ -56,18 +56,11 @@ export default class Dashboard extends Component {
     )
   }
   renderRow(rowData: {}, sectionId: number, rowId: number) {
-    let rowText = ''
     const daysDiff = getDaysDiff(rowData.lastChecked)
-    switch (daysDiff) {
-      case -1:
-        rowText = 'Let\'s get started!'; break
-      case 0:
-        rowText = 'You did it!'; break
-      case 1:
-        rowText = 'Let\'s repeat!'; break
-      default:
-        rowText = 'Don\'t be a stranger!'; break
-    }
+    const rowText = daysDiff === -1 ? 'Let\'s get started!' :
+      daysDiff === 0 ? 'You did it!' :
+      daysDiff === 1 ? 'Let\'s repeat!' :
+      'Don\'t be a stranger!'
     return (
       <TouchableOpacity key={`${sectionId}${rowId}`} onPress={() => this.pressRow(rowData, rowId)}>
         <View style={styles.rowContentContainer}>
