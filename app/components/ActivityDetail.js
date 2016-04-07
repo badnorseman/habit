@@ -25,7 +25,7 @@ export default class ActivityDetail extends Component {
     const barTintColor = 'rgb(0,121,107)'
     const tintColor = 'rgb(255,255,255)'
     const startedText = `You started this habit on ${started}.`
-    const lastCheckedText = data.lastChecked ? `You did this habit last on ${lastChecked}.` : 'You haven\'t done this habit yet.'
+    const lastCheckedText = data.lastChecked ? `This habit was last checked on ${lastChecked}.` : 'You didn\'t check yet?'
     const scoreText = `Your score for this habit is ${data.score} points.`
     return (
       <TabBarIOS barTintColor={barTintColor} tintColor={tintColor}>
